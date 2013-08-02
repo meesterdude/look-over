@@ -15,7 +15,6 @@ module Gatling
       crop_element(screenshot, element, element_position)
     end
 
-    private
     def self.take_screenshot
       temp_dir = Gatling::Configuration.path(:temp)
       FileUtils.mkdir_p(temp_dir) unless File.exists?(temp_dir)
