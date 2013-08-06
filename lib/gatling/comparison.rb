@@ -35,7 +35,9 @@ module Gatling
         expanded_image.background_color = 'white'
         expanded_image
       end
-      images_to_compare.first.compare_channel(images_to_compare.last, Magick::MeanAbsoluteErrorMetric)
+    images_to_compare.first.compare_channel(images_to_compare.last, Magick::MeanAbsoluteErrorMetric) do
+        self.highlight_color = Pixel.new(2,200,100,70)
+      end
     end
 
     def compare_images_with_same_size?
