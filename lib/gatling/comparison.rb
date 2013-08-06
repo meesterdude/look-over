@@ -22,7 +22,7 @@ module Gatling
     def compare_images_with_same_size
       images_to_compare = prep_images_for_comparison
       images_to_compare.first.compare_channel(images_to_compare.last, Magick::MeanAbsoluteErrorMetric) do
-        self.highlight_color = Pixel.new(2,200,100,.5)
+        self.highlight_color = Pixel.new(2,200,100,70)
       end
     end
 
