@@ -37,7 +37,7 @@ module Gatling
       end
     images_to_compare.first.compare_channel(images_to_compare.last, Magick::MeanAbsoluteErrorMetric) do
         self.highlight_color = Magick::Pixel.new(65300,100,0,40000)
-        self.lowlight_color = Magick::Pixel.new(0,1000,65300,60000)
+        self.lowlight_color = Magick::Pixel.new(0,65300,1000,60000)
       end
     end
 
