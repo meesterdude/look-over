@@ -92,7 +92,7 @@ Imagemagick must be installed:
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
 == History
-looks_good is a form of the [gatling gem](https://github.com/gabrielrotbart/gatling) with expanded functionality 
+looks_good is an expansion of (gatling)[https://github.com/gabrielrotbart/gatling] with added functionality and updated dependecies.
 
 == Copyright
 
