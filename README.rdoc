@@ -28,7 +28,8 @@ Use LooksGood's custom matcher and specify the reference image:
         
         expect(@element).to look_like(:main_section)
 
-LooksGood will take care of cropping the element and try and make a targeted match without the noise of the whole page. the parameter passed to `look_like` is the name that will be used to store the initial screenshot, and will be used in subsequent comparisons. `look_like` can also handle the file naming and storage, if you specify a symbol. If the above is from the spec `system/frontend/login_spec.rb`, then the screenshot will be stored in `spec/screenshots/system/frontend/login/main_section.png`. 
+LooksGood will take care of cropping the element and try and make a targeted match without the noise of the whole page. 
+The parameter passed to look_like is the name that will be used to store the initial screenshot, and will be used in subsequent comparisons. look_like can also handle the file naming and storage, if you specify a symbol. If the above is from the spec "system/frontend/login_spec.rb", then the screenshot will be stored in "spec/screenshots/system/frontend/login/main_section.png". 
 
 You can ovveride this automatic behavior by specifying the file path as a string. 
 
