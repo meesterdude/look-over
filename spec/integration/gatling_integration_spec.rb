@@ -1,7 +1,7 @@
 require 'spec_helper'
 include Capybara::DSL
 
-describe 'Gatling' do
+describe 'LooksGood' do
 
   before(:all) do
     @spec_support_root = spec_support_root
@@ -10,14 +10,14 @@ describe 'Gatling' do
   end
 
   before(:each) do
-    @ref_path = Gatling::Configuration.reference_image_path = File.join(spec_support_root, 'ref_path')
+    @ref_path = LooksGood::Configuration.reference_image_path = File.join(spec_support_root, 'ref_path')
   end
 
   after(:each) do
     remove_refs(@ref_path)
   end
 
-  describe 'Gatling, when no reference image exists' do
+  describe 'LooksGood, when no reference image exists' do
 
     it "will notify that no reference image exists and create a candidate image" do
       pending
@@ -28,7 +28,7 @@ describe 'Gatling' do
                        "is now available to be used as a reference. " +
                        "Copy candidate to root reference_image_path to use as reference"
 
-      expect {Gatling.matches?(@black_box, mock_element)}.to raise_error(RuntimeError, expected_error)
+      expect {LooksGood.matches?(@black_box, mock_element)}.to raise_error(RuntimeError, expected_error)
 
       File.exists?(File.join(@ref_path, 'candidate', @black_box)).should be_true
     end

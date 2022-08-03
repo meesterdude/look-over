@@ -2,8 +2,8 @@ require 'rubygems'
 require 'capybara'
 require 'capybara/dsl'
 require 'capybara/rspec'
-require 'gatling'
-require 'gatling/matchers/look_like_matcher'
+require 'looks_good'
+require 'looks_good/matchers/look_like_matcher'
 require 'fileutils'
 require 'pry'
 
@@ -18,9 +18,9 @@ Capybara.default_driver = :selenium
 Capybara.run_server = false
 
 def config_clean_up
-  Gatling::Configuration.reference_image_path = nil
-  Gatling::Configuration.browser_folders = false
-  Gatling::Configuration.max_no_tries = nil
+  LooksGood::Configuration.reference_image_path = nil
+  LooksGood::Configuration.browser_folders = false
+  LooksGood::Configuration.max_no_tries = nil
 end
 
 def remove_refs(dir)

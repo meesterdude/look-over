@@ -1,6 +1,6 @@
 require 'logger'
 
-module Gatling
+module LooksGood
   module Configuration
 
     class << self
@@ -15,11 +15,11 @@ module Gatling
       end
 
       def max_no_tries
-        @max_no_tries ||= 5
+        @max_no_tries ||= 2
       end
 
       def sleep_between_tries
-        @sleep_between_tries ||= 0.5
+        @sleep_between_tries ||= 0.1
       end
 
       def path(type)

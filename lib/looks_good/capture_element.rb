@@ -1,9 +1,9 @@
 require 'fileutils'
-require 'gatling'
+require 'looks_good'
 
-module Gatling
+module LooksGood
   module CaptureElement
-    extend Gatling::Configuration
+    extend LooksGood::Configuration
 
     def self.capture(element)
       # Getting the element position before screenshot because of a side effect
@@ -16,7 +16,7 @@ module Gatling
     end
 
     def self.take_screenshot
-      temp_dir = Gatling::Configuration.path(:temp)
+      temp_dir = LooksGood::Configuration.path(:temp)
       FileUtils.mkdir_p(temp_dir) unless File.exists?(temp_dir)
       #captures the uncropped full screen
       begin
@@ -28,7 +28,7 @@ module Gatling
       end
     end
 
-    def self.get_element_position element
+    def self.get_element_position(element)
       element = element.native
       position = Hash.new{}
       position[:x] = element.location.x
@@ -38,8 +38,8 @@ module Gatling
       position
     end
 
-    def self.crop_element image, element_to_crop, position
-      cropped_element = image.crop(position[:x], position[:y], position[:width], position[:height])
+    def self.crop_element(image, element_to_crop, position)
+      cropped_element = image.scale(0.5).crop(position[:x], position[:y], position[:width], position[:height])
     end
 
   end

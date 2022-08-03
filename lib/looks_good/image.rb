@@ -1,4 +1,4 @@
-module Gatling
+module LooksGood
   class Image
 
     attr_accessor :file_name, :path, :image
@@ -22,7 +22,7 @@ module Gatling
     end
 
     def path(type = :reference)
-      @path = File.join(Gatling::Configuration.path(type), @file_name)
+      @path = File.join(LooksGood::Configuration.path(type), @file_name)
     end
 
   end
@@ -36,9 +36,9 @@ module Gatling
     end
 
     def verify_and_save
-      Gatling::Configuration.max_no_tries.times do
+      LooksGood::Configuration.max_no_tries.times do
         comparable = capture_image
-        matches = Gatling::Comparison.new(self,Image.new(comparable,@file_name)).matches?
+        matches = LooksGood::Comparison.new(self,Image.new(comparable,@file_name)).matches?
         if matches
           self.save
           puts "Saved #{self.path} as reference"
@@ -52,7 +52,7 @@ module Gatling
 
     private
     def capture_image
-      Gatling::CaptureElement.capture(@element)
+      LooksGood::CaptureElement.capture(@element)
     end
 
     #TODO: make save a relevant subclass method

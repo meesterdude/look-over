@@ -5,7 +5,7 @@ describe 'rspec matcher' do
 
   before(:each) do
     @black_box = 'black.png'
-    @ref_path = Gatling::Configuration.reference_image_path = File.join(spec_support_root, 'ref_path')
+    @ref_path = LooksGood::Configuration.reference_image_path = File.join(spec_support_root, 'ref_path')
     create_images_for_web_page
   end
 
@@ -14,7 +14,7 @@ describe 'rspec matcher' do
     remove_refs(@ref_path)
   end
 
-  describe 'initializing and runnin gatling' do
+  describe 'initializing and runnin looks_good' do
 
     it 'will pass if images matches reference' do
       create_square_image(@ref_path, 'black')

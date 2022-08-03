@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gatling::CaptureElement do
+describe LooksGood::CaptureElement do
 
   # creating a dummy class to test a module
   class SomeClass
@@ -8,7 +8,7 @@ describe Gatling::CaptureElement do
 
   before :each do
     subject = SomeClass.new
-    subject.extend(Gatling::CaptureElement)
+    subject.extend(LooksGood::CaptureElement)
   end
 
   after :each do

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Gatling::Configuration do
+describe LooksGood::Configuration do
 
 
   describe "#reference_image_path" do
@@ -11,7 +11,7 @@ describe Gatling::Configuration do
 
     describe "without Rails" do
       it "should default to './spec/reference_images' when not in a rails environment" do
-        Gatling::Configuration.reference_image_path.should eql("spec/reference_images")
+        LooksGood::Configuration.reference_image_path.should eql("spec/reference_images")
       end
     end
 
@@ -90,7 +90,7 @@ describe Gatling::Configuration do
       end
 
       it "should be settable" do
-        Gatling::Configuration.max_no_tries = 1
+        LooksGood::Configuration.max_no_tries = 1
         subject.max_no_tries.should == 1
       end
   end
@@ -112,14 +112,14 @@ describe Gatling::Configuration do
     describe "should accept a block of settings and parse them correctly" do
 
       it "for reference_image_path" do
-        Gatling.config do |c|
+        LooksGood.config do |c|
           c.reference_image_path = 'custom_path'
         end
         subject.reference_image_path.should == 'custom_path'
       end
 
       it "for max_no_tries" do
-        Gatling.config do |c|
+        LooksGood.config do |c|
           c.max_no_tries = 3
         end
 
@@ -127,14 +127,14 @@ describe Gatling::Configuration do
       end
 
       it "sleep_between_tries" do
-        Gatling.config do |c|
+        LooksGood.config do |c|
           c.sleep_between_tries = 0.7
         end
         subject.sleep_between_tries.should == 0.7
       end
 
      it "for browser_folders" do
-        Gatling.config do |c|
+        LooksGood.config do |c|
           c.browser_folders = true
         end
 
@@ -147,7 +147,7 @@ describe Gatling::Configuration do
   describe "config block" do
 
     it 'should be able to set a config block' do
-      Gatling.config do |c|
+      LooksGood.config do |c|
         c.reference_image_path = 'some/path'
         c.max_no_tries = 4
         c.sleep_between_tries = 5
@@ -162,13 +162,13 @@ describe Gatling::Configuration do
 
     it 'should raise depreciation alert when calling old block' do
       expect {
-        Gatling.config do |c|
-          Gatling.reference_image_path = 'some/path'
-          Gatling.max_no_tries = 4
-          Gatling.sleep_between_tries = 5
-          Gatling.browser_folders = false
+        LooksGood.config do |c|
+          LooksGood.reference_image_path = 'some/path'
+          LooksGood.max_no_tries = 4
+          LooksGood.sleep_between_tries = 5
+          LooksGood.browser_folders = false
       end
-      }.to raise_error "Config block has changed. Example: Gatling.config {|c| c.reference_image_path = 'some/path'}. Please see README"
+      }.to raise_error "Config block has changed. Example: LooksGood.config {|c| c.reference_image_path = 'some/path'}. Please see README"
     end
 
    
