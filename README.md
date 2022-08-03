@@ -56,14 +56,14 @@ you can override any of the defaults with a config block.
 
 #### Configuration settings are set with the following:
 
-  LooksGood.config do |c|
-    c.reference_image_path = 'spec/screenshots'
-    c.max_no_tries = 1
-    c.default_within = 0.01
-    c.sleep_between_tries = 0.5
-    c.browser_folders = false
-    c.scale_amount = 0.5
-  end
+          LooksGood.config do |c|
+            c.reference_image_path = 'spec/screenshots'
+            c.max_no_tries = 1
+            c.default_within = 0.01
+            c.sleep_between_tries = 0.5
+            c.browser_folders = false
+            c.scale_amount = 0.5
+          end
 
 
 #### reference_image_path - sets where the reference and diff images are saved to.
