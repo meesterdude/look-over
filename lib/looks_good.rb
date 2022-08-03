@@ -10,7 +10,7 @@ require 'looks_good/capture_element'
 module LooksGood
   class << self
 
-    def match_result(expected_reference_filename, actual_element, within: 0.01)
+    def match_result(expected_reference_filename, actual_element, within: LooksGood::Configuration.default_within)
       result_hash = {}
       @actual_element = actual_element
       @expected_reference_filename = expected_reference_filename

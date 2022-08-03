@@ -5,7 +5,7 @@ module LooksGood
 
     class << self
 
-      attr_accessor :reference_image_path, :max_no_tries, :sleep_between_tries, :browser_folders
+      attr_accessor :reference_image_path, :max_no_tries, :sleep_between_tries, :browser_folders, :default_within
 
       attr_reader :paths
 
@@ -14,8 +14,12 @@ module LooksGood
         @browser_folders ? (reference_path_with_browser_folders) : @reference_image_path
       end
 
+      def default_within
+        @default_within ||= 0.01 # 1%
+      end
+
       def max_no_tries
-        @max_no_tries ||= 2
+        @max_no_tries ||= 1
       end
 
       def sleep_between_tries
