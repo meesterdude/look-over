@@ -6,13 +6,12 @@ A visual RSpec matcher to ensure the entire page (or specific elements) have not
 
 ## Installation:
 
-  gem install looks_good
+        gem install looks_good
 
 In rails_helper.rb:
 
-  #main app
-  require 'looks_good'
-  require 'looks_good/matchers/look_like_matcher'
+        require 'looks_good'
+        require 'looks_good/matchers/look_like_matcher'
 
 add to your `.gitignore`
 
