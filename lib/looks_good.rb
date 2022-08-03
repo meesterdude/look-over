@@ -6,11 +6,17 @@ require 'looks_good/configuration'
 require 'looks_good/image'
 require 'looks_good/comparison'
 require 'looks_good/capture_element'
+require 'looks_good/rspec_config'
 
 module LooksGood
   class << self
 
-    def match_result(expected_reference_filename, actual_element, within: LooksGood::Configuration.default_within)
+    def check(expected_reference_filename, actual_element, within: LooksGood::Configuration.default_within)
+       result = match_result(expected_reference_filename, actual_element, within: within)
+       result
+    end
+
+    def match_result(expected_reference_filename, actual_element, within:)
       result_hash = {}
       @actual_element = actual_element
       @expected_reference_filename = expected_reference_filename
@@ -30,8 +36,11 @@ module LooksGood
         if !matches
           comparison.actual_image.save(:candidate)
           save_image_as_diff(comparison.diff_image)
-          result_hash[:message] = "view visual diff image #{comparison.diff_image.path(:diff)}\n" +
-                    "New reference #{comparison.diff_image.path(:candidate)} can be used to fix the spec or by running rspec with LOOKS_GOOD=true"
+          result_hash[:message] = %Q[view a visual diff image: open #{comparison.diff_image.path(:diff)}\n
+HOW TO FIX:\n 
+- cp #{comparison.diff_image.path(:candidate)} #{@expected_reference_file}
+or
+- LOOKS_GOOD=true rspec ...]
           result_hash[:result] = false
           result_hash
         else
@@ -72,6 +81,13 @@ module LooksGood
     def save_reference
       ImageFromElement.new(@actual_element,@expected_reference_filename).verify_and_save
     end
+
+    def cleanup
+      FileUtils.remove_dir(LooksGood::Configuration.path(:temp)) if File.directory?(LooksGood::Configuration.path(:temp))
+      FileUtils.remove_dir(LooksGood::Configuration.path(:diff)) if File.directory?(LooksGood::Configuration.path(:diff))
+      FileUtils.remove_dir(LooksGood::Configuration.path(:candidate)) if File.directory?(LooksGood::Configuration.path(:candidate))
+    end
+
 
     def config(&block)
       begin

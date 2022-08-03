@@ -3,7 +3,12 @@ require 'looks_good'
 RSpec::Matchers.define :look_like do |expected|
   result = nil
   match do |actual|
-    result = LooksGood.match_result(expected, actual)
+    if expected.is_a?(Symbol)
+      called_by_file = self.caller.find{|str| str.include?("_spec.rb")}
+      path_to = called_by_file.split("_spec.rb").first.split("spec/").last
+      expected = File.join(path_to, "#{expected}.png")
+    end
+    result = LooksGood.check(expected, actual)
     result[:result]
   end
 

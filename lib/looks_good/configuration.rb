@@ -18,6 +18,11 @@ module LooksGood
         @default_within ||= 0.01 # 1%
       end
 
+      # allows retina mac screenshots to be scaled to expected size
+      def scale_amount
+        @scale_amount ||= 0.5 
+      end
+
       def max_no_tries
         @max_no_tries ||= 1
       end
@@ -28,17 +33,18 @@ module LooksGood
 
       def path(type)
         paths =  {:reference => reference_image_path,
-                  :candidate => File.join(reference_image_path, 'candidate'),
-                  :diff => File.join(reference_image_path, 'diff'),
-                  :temp => File.join(reference_image_path, 'temp')}
+                  :temp => File.join(reference_image_path, 'tmp', 'tmp'),
+                  :candidate => File.join(reference_image_path, 'temp', 'candidate'),
+                  :diff => File.join(reference_image_path, 'temp', 'diff')
+                 }
         paths[type]
       end
 
       def default_reference_path
         begin
-          reference_image_path = File.join(Rails.root, 'spec/reference_images')
+          reference_image_path = File.join(Rails.root, 'spec/screenshots')
         rescue
-          reference_image_path = 'spec/reference_images'
+          reference_image_path = 'spec/screenshots'
           puts "Currently defaulting to #{@reference_image_path}. Overide this by setting reference_image_path=[refpath] in your configuration block"
         end
         reference_image_path
@@ -59,7 +65,7 @@ module LooksGood
         rescue
           browser = Selenium.page.driver.browser.browser
         rescue
-          raise "Currently custom folders are only supported by Capybara. ENV variables are coming."
+          raise "Currently custom folders are only supported by Capybara"
           return nil
         end
         browser.to_s
