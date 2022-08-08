@@ -46,9 +46,9 @@ module LooksGood
         expanded_image.background_color = 'white'
         expanded_image
       end
-    images_to_compare.first.compare_channel(images_to_compare.last, Magick::PeakAbsoluteErrorMetric) do
-        self.highlight_color = Magick::Pixel.new(65300,100,0,38000)
-        self.lowlight_color = Magick::Pixel.new(0,65300,1000,60000)
+    images_to_compare.first.compare_channel(images_to_compare.last, Magick::PeakAbsoluteErrorMetric) do |img|
+        img.highlight_color = Magick::Pixel.new(65300,100,0,38000)
+        img.lowlight_color = Magick::Pixel.new(0,65300,1000,60000)
       end
     end
 
