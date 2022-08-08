@@ -19,11 +19,9 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency('rmagick', ['>=2.15.4'])
-  s.add_runtime_dependency('rspec',['>=3.4.0'])
   s.add_runtime_dependency('capybara',['>=2.6.0'])
 
   s.add_development_dependency('rake',['>=0.9.2'])
-  s.add_development_dependency('rspec-instafail',['>=0.1.8'])
   s.add_development_dependency('pry',['>=0.10.2'])
   s.add_development_dependency('selenium-webdriver',['~> 2.53.0'])
 end
