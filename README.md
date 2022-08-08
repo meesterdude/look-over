@@ -1,24 +1,23 @@
-= LooksGood
+# LooksGood
 
 A visual RSpec matcher to ensure the entire page (or specific elements) have not changed. Allows for a tolerance to be set, so you can reuire pixel-perfect or allow for some minor changes. 
 
 -------------------------------------
 
-== Installation:
+## Installation:
 
-  gem install looks_good
+        gem install looks_good
 
 In rails_helper.rb:
 
-  #main app
-  require 'looks_good'
-  require 'looks_good/matchers/look_like_matcher'
+        require 'looks_good'
+        require 'looks_good/matchers/look_like_matcher'
 
 add to your `.gitignore`
 
-  spec/screenshots/tmp/*
+        spec/screenshots/tmp/*
 
-=== Usage:
+### Usage:
 
 Identify an element to match, for example:
 
@@ -28,7 +27,10 @@ Use LooksGood's custom matcher and specify the reference image:
         
         expect(@element).to look_like(:main_section)
 
-LooksGood will take care of cropping the element and try and make a targeted match without the noise of the whole page. the parameter passed to `look_like` is the name that will be used to store the initial screenshot, and will be used in subsequent comparisons. `look_like` can also handle the file naming and storage, if you specify a symbol. If the above is from the spec `system/frontend/login_spec.rb`, then the screenshot will be stored in `spec/screenshots/system/frontend/login/main_section.png`. 
+LooksGood will take care of cropping the element and try and make a targeted match without the noise of the whole page. 
+The parameter passed to `look_like` is the name that will be used to store the initial screenshot, and will be used in subsequent comparisons. 
+
+`look_like` can also handle the file naming and storage, if you specify a symbol. If the above example is from the spec `system/frontend/login_spec.rb`, then the screenshot will be stored in `spec/screenshots/system/frontend/login/main_section.png`. 
 
 You can ovveride this automatic behavior by specifying the file path as a string. 
 
@@ -42,28 +44,29 @@ If you want to adjust how tolerant the matcher is of differences, specify a floa
 
 If no reference image exits, the test will pass and a reference file will be created for future comparisons.
 
-If you encounter a failure for a desired change, a diff image will be created to visualze the differences as well as a reference to the new version. you can either copy the file provided in the error, or run your test suite again with `LOOKS_GOOD=true` to update it to the new version. 
+If you encounter a failure for a desired change, a diff image will be created to visualze the differences as well as a reference to the new version. 
+you can either copy the file provided in the error, or run your test suite again with `LOOKS_GOOD=true` to update it to the new version. 
 
 
 -------------------------------------
 
-=== Configuration settings:
+### Configuration settings:
 
 you can override any of the defaults with a config block. 
 
-==== Configuration settings are set with the following:
+#### Configuration settings are set with the following:
 
-  LooksGood.config do |c|
-    c.reference_image_path = 'spec/screenshots'
-    c.max_no_tries = 1
-    c.default_within = 0.01
-    c.sleep_between_tries = 0.5
-    c.browser_folders = false
-    c.scale_amount = 0.5
-  end
+          LooksGood.config do |c|
+            c.reference_image_path = 'spec/screenshots'
+            c.max_no_tries = 1
+            c.default_within = 0.01
+            c.sleep_between_tries = 0.5
+            c.browser_folders = false
+            c.scale_amount = 0.5
+          end
 
 
-==== reference_image_path - sets where the reference and diff images are saved to.
+#### reference_image_path - sets where the reference and diff images are saved to.
 
 For Rails application, a default images folder will be created at spec/screenshots. This folder is root to all the reference
 images to be compares, but can be changed. 
@@ -73,25 +76,25 @@ Also created are subfolders:
 - tmp/candidate/  - will hold candidate images which can be used as the new versions of reference images
 - tmp/diff/ - will hold the visual diff images for inspection when comparison fails
 
-==== max_no_tries 
+#### max_no_tries 
 - sets how many times looks_good will try and match the element against the reference image. Handy to reduce fragility of tests due to animations and load times. Defaults to 1.
 
-==== default_within
+#### default_within
 - a float between 0 and 1 that sets the default tolerance for visual differences. default is 0.01 (1%)
 
-==== scale_amount
+#### scale_amount
 - Retina mac screenshots are 2x actual size, so this scales them to be 1:1. default is 0.5, set to 1 to disable. 
 
-==== Sleep_between_tries 
+#### Sleep_between_tries 
 - sets the sleep time (in seconds) between match tries (requires max_no_tries > 1). Defaults to 0.5
 
-==== browser_folders 
+#### browser_folders 
 - *Currently only available with Selenium-Webdriver / Capybara* - create reference folders based on the current Selenium driver's browser. Allows for cross-browser visual testing.
 
 
 -------------------------------------
 
-==== Non-gem dependencies:
+#### Non-gem dependencies:
 
 Imagemagick must be installed:
 
@@ -100,7 +103,7 @@ Imagemagick must be installed:
 -------------------------------------
 
 
-== Contributing to looks_good
+## Contributing to `looks_good`
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
