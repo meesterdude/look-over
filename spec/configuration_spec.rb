@@ -41,7 +41,7 @@ describe LooksGood::Configuration do
 
       it 'should return the directory for a type of image' do
         subject.reference_image_path = "a_path"
-        subject.path(:temp).should == 'a_path/temp'
+        subject.path(:tmp).should == 'a_path/tmp'
       end
 
     end

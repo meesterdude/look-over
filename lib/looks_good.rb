@@ -83,7 +83,7 @@ or
     end
 
     def cleanup
-      FileUtils.remove_dir(LooksGood::Configuration.path(:temp)) if File.directory?(LooksGood::Configuration.path(:temp))
+      FileUtils.remove_dir(LooksGood::Configuration.path(:tmp)) if File.directory?(LooksGood::Configuration.path(:tmp))
       FileUtils.remove_dir(LooksGood::Configuration.path(:diff)) if File.directory?(LooksGood::Configuration.path(:diff))
       FileUtils.remove_dir(LooksGood::Configuration.path(:candidate)) if File.directory?(LooksGood::Configuration.path(:candidate))
     end

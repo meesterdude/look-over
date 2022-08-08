@@ -33,9 +33,9 @@ module LooksGood
 
       def path(type)
         paths =  {:reference => reference_image_path,
-                  :temp => File.join(reference_image_path, 'tmp', 'tmp'),
-                  :candidate => File.join(reference_image_path, 'temp', 'candidate'),
-                  :diff => File.join(reference_image_path, 'temp', 'diff')
+                  :tmp => File.join(reference_image_path, 'tmp', 'tmp'),
+                  :candidate => File.join(reference_image_path, 'tmp', 'candidate'),
+                  :diff => File.join(reference_image_path, 'tmp', 'diff')
                  }
         paths[type]
       end

@@ -16,7 +16,7 @@ module LooksGood
     end
 
     def self.take_screenshot
-      temp_dir = LooksGood::Configuration.path(:temp)
+      temp_dir = LooksGood::Configuration.path(:tmp)
       FileUtils.mkdir_p(temp_dir) unless File.exists?(temp_dir)
       #captures the uncropped full screen
       begin
