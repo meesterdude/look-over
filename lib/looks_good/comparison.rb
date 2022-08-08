@@ -3,7 +3,7 @@ module LooksGood
 
     attr_accessor :diff_image, :actual_image, :expected_image
 
-    def initialize(actual_image, expected_image, within=0.01)
+    def initialize(actual_image, expected_image, within=LooksGood::Configuration.default_within)
       @actual_image = actual_image
       @expected_image = expected_image
       @comparison = compare_image
