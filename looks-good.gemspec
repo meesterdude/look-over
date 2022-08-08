@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "looks_good/version"
 
 Gem::Specification.new do |s|
-  s.name        = "looks_good"
+  s.name        = "looks-good"
   s.version     = LooksGood::VERSION
   s.authors     = ["Russell Jennings"]
   s.email       = ["violentpurr@gmail.com"]
@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{Rspec visual testing}
   s.description = %q{Rspec visual testing with percent matching tolerance}
 
-  s.rubyforge_project = "looks_good"
+  s.rubyforge_project = "looks-good"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
