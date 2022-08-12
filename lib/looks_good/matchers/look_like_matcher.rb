@@ -1,5 +1,5 @@
 require 'looks_good'
-
+require 'rspec'
 RSpec::Matchers.define :look_like do |expected, within: LooksGood::Configuration.default_within|
   result = nil
   match do |actual|
