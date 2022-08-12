@@ -78,10 +78,10 @@ Also created are subfolders:
 - tmp/diff/ - will hold the visual diff images for inspection when comparison fails
 
 #### max_no_tries 
-- sets how many times looks_good will try and match the element against the reference image. Handy to reduce fragility of tests due to animations and load times. Defaults to 1.
+- sets how many times looks_good will try and match the element against the reference image. Handy to reduce fragility of tests due to animations and load times. Defaults to 2.
 
 #### default_within
-- a float between 0 and 1 that sets the default tolerance for visual differences. default is 0.00001, which is strict but not absolute 0. Larger screenshots will be less sensitive to subtle differences as a percentage. 
+- a float between 0 and 1 that sets the default tolerance for visual differences. default is 0.0001, which is strict but not absolute 0. Larger screenshots will be less sensitive to subtle differences as a percentage. 
 
 #### fuzz
 - allows pixels to not need to match exactly. a string percentage value, provided to imagemagick as fuzz value for comparison. default is "10%"

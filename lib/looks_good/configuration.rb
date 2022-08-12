@@ -15,7 +15,7 @@ module LooksGood
       end
 
       def default_within
-        @default_within ||= 0.00001
+        @default_within ||= 0.0001
       end
 
       # allows retina mac screenshots to be scaled to expected size
@@ -24,7 +24,7 @@ module LooksGood
       end
 
       def max_no_tries
-        @max_no_tries ||= 1
+        @max_no_tries ||= 2
       end
 
       def fuzz

@@ -1,6 +1,6 @@
 require 'looks_good'
 
-RSpec::Matchers.define :look_like do |expected|
+RSpec::Matchers.define :look_like do |expected, within: LooksGood::Configuration.default_within|
   result = nil
   match do |actual|
     if expected.is_a?(Symbol)
@@ -8,7 +8,7 @@ RSpec::Matchers.define :look_like do |expected|
       path_to = called_by_file.split("_spec.rb").first.split("spec/").last
       expected = File.join(path_to, "#{expected}.png")
     end
-    result = LooksGood.check(expected, actual)
+    result = LooksGood.check(expected, actual, within: within)
     result[:result]
   end
 
