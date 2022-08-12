@@ -5,7 +5,7 @@ module LooksGood
 
     class << self
 
-      attr_accessor :reference_image_path, :max_no_tries, :sleep_between_tries, :browser_folders, :default_within
+      attr_accessor :fuzz, :reference_image_path, :max_no_tries, :sleep_between_tries, :browser_folders, :default_within
 
       attr_reader :paths
 
@@ -15,7 +15,7 @@ module LooksGood
       end
 
       def default_within
-        @default_within ||= 0.01 # 1%
+        @default_within ||= 0.00001
       end
 
       # allows retina mac screenshots to be scaled to expected size
@@ -25,6 +25,10 @@ module LooksGood
 
       def max_no_tries
         @max_no_tries ||= 1
+      end
+
+      def fuzz
+        @fuzz ||= "10%"
       end
 
       def sleep_between_tries

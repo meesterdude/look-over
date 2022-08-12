@@ -29,6 +29,8 @@ module LooksGood
 
   class ImageFromElement < Image
 
+    attr_accessor :image
+    
     def initialize(element, file_name)
       super(image, file_name)
       @element = element

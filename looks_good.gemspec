@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_runtime_dependency('rmagick', ['>=2.15.4'])
+  s.add_runtime_dependency('mini_magick', ['>=4.11.0'])
   s.add_runtime_dependency('capybara',['>=2.6.0'])
 
   s.add_development_dependency('rake',['>=0.9.2'])

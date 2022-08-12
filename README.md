@@ -63,6 +63,7 @@ you can override any of the defaults with a config block.
             c.sleep_between_tries = 0.5
             c.browser_folders = false
             c.scale_amount = 0.5
+            c.fuzz = "10%"
           end
 
 
@@ -80,7 +81,10 @@ Also created are subfolders:
 - sets how many times looks_good will try and match the element against the reference image. Handy to reduce fragility of tests due to animations and load times. Defaults to 1.
 
 #### default_within
-- a float between 0 and 1 that sets the default tolerance for visual differences. default is 0.01 (1%)
+- a float between 0 and 1 that sets the default tolerance for visual differences. default is 0.00001, which is strict but not absolute 0. Larger screenshots will be less sensitive to subtle differences as a percentage. 
+
+#### fuzz
+- allows pixels to not need to match exactly. a string percentage value, provided to imagemagick as fuzz value for comparison. default is "10%"
 
 #### scale_amount
 - Retina mac screenshots are 2x actual size, so this scales them to be 1:1. default is 0.5, set to 1 to disable. 

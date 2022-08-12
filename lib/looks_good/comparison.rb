@@ -1,7 +1,8 @@
+require 'mini_magick'
 module LooksGood
   class Comparison
 
-    attr_accessor :diff_image, :actual_image, :expected_image
+    attr_accessor :diff_image, :diff_image_file, :actual_image, :expected_image
 
     def initialize(actual_image, expected_image, within=LooksGood::Configuration.default_within)
       @actual_image = actual_image
@@ -9,8 +10,8 @@ module LooksGood
       @comparison = compare_image
       @within = within
       # within is a float of % image difference between the two images
-      @match = @comparison[1] <= @within
-      @diff_image =LooksGood::Image.new(@comparison.first, @expected_image.file_name) unless @matches
+      @match = @comparison <= @within
+      @diff_image =LooksGood::Image.new(@diff_image_file, @expected_image.file_name)
     end
 
     def matches?
@@ -22,7 +23,7 @@ module LooksGood
     end
 
     def percent_difference
-      @comparison[1]
+      @comparison
     end
 
     def compare_image
@@ -31,10 +32,7 @@ module LooksGood
 
     def compare_images_with_same_size
       images_to_compare = prep_images_for_comparison
-      images_to_compare.first.compare_channel(images_to_compare.last, Magick::PeakAbsoluteErrorMetric, Magick::AllChannels) do
-        self.highlight_color = Magick::Pixel.new(65300,100,0,38000)
-        self.lowlight_color = Magick::Pixel.new(0,65300,1000,60000)
-      end
+      mini_compare(images_to_compare)
     end
 
     def compare_images_with_different_size
@@ -46,14 +44,34 @@ module LooksGood
         expanded_image.background_color = 'white'
         expanded_image
       end
-    images_to_compare.first.compare_channel(images_to_compare.last, Magick::PeakAbsoluteErrorMetric) do |img|
-        img.highlight_color = Magick::Pixel.new(65300,100,0,38000)
-        img.lowlight_color = Magick::Pixel.new(0,65300,1000,60000)
-      end
+      mini_compare(images_to_compare)
     end
 
     def compare_images_with_same_size?
       @actual_image.image.rows == @expected_image.image.rows && @actual_image.image.columns == @expected_image.image.columns
+    end
+
+    # drop in refactor to utilize mini_magick. 
+    # returns a float % of difference 
+    # TODO: remove rmagick
+    def mini_compare(images)
+      actual_image, expected_image = images
+      actual_image.write(actual_image.filename)
+      pixel_difference_count = nil
+      MiniMagick::Tool::Compare.new(whiny: false) do |comp|
+        comp.fuzz(LooksGood::Configuration.fuzz)  
+        comp.metric("AE")
+        comp << actual_image.filename  
+        comp << expected_image.filename
+        diff_file_name = File.join(LooksGood::Configuration.path(:diff), @actual_image.file_name)
+        FileUtils::mkdir_p(File.dirname(diff_file_name)) unless File.exists?(diff_file_name)
+        comp << diff_file_name
+        comp.call do |stdout, stderr, status|
+         pixel_difference_count = stderr
+        end
+        @diff_image_file = Magick::Image.read(diff_file_name).first
+      end
+      pixel_difference_count.to_f / (expected_image.rows * expected_image.columns)
     end
 
     def prep_images_for_comparison

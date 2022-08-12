@@ -35,7 +35,6 @@ module LooksGood
         matches = comparison.matches?
         if !matches
           comparison.actual_image.save(:candidate)
-          save_image_as_diff(comparison.diff_image)
           result_hash[:message] = %Q[view a visual diff image: open #{comparison.diff_image.path(:diff)}\n
 HOW TO FIX:\n 
 - cp #{comparison.diff_image.path(:candidate)} #{@expected_reference_file}
@@ -67,11 +66,6 @@ or
       @comparison
     end
 
-    def save_image_as_diff(image)
-      image.save(:diff)
-     
-    end
-
     def save_image_as_candidate(image)
       image.save(:candidate)
       raise "The design reference #{image.file_name} does not exist, #{image.path(:candidate)} " +
@@ -79,6 +73,7 @@ or
     end
 
     def save_reference
+      sleep 0.5 # ensures page/browser stability of focus effects etc inherent in browsers
       ImageFromElement.new(@actual_element,@expected_reference_filename).verify_and_save
     end
 
