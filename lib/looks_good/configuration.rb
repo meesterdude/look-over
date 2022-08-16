@@ -5,7 +5,8 @@ module LooksGood
 
     class << self
 
-      attr_accessor :fuzz, :reference_image_path, :max_no_tries, :sleep_between_tries, :browser_folders, :default_within
+      attr_accessor :fuzz, :reference_image_path, :max_no_tries, :sleep_between_tries, 
+                    :browser_folders, :default_within, :scale_amount
 
       attr_reader :paths
 
