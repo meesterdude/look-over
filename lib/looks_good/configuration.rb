@@ -6,7 +6,7 @@ module LooksGood
     class << self
 
       attr_accessor :fuzz, :reference_image_path, :max_no_tries, :sleep_between_tries, 
-                    :browser_folders, :default_within, :scale_amount
+                    :browser_folders, :default_within, :scale_amount, :disable_scaling
 
       attr_reader :paths
 
@@ -26,6 +26,10 @@ module LooksGood
 
       def max_no_tries
         @max_no_tries ||= 2
+      end
+
+      def disable_scaling
+        @disable_scaling ||= false
       end
 
       def fuzz

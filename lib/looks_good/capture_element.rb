@@ -39,7 +39,8 @@ module LooksGood
     end
 
     def self.crop_element(image, element_to_crop, position)
-      cropped_element = image.scale!(LooksGood::Configuration.scale_amount).crop!(position[:x], position[:y], position[:width], position[:height])
+      image.scale!(LooksGood::Configuration.scale_amount) unless LooksGood::Configuration.disable_scaling 
+      cropped_element = image.crop!(position[:x], position[:y], position[:width], position[:height])
     end
 
   end
