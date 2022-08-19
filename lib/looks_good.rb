@@ -39,7 +39,9 @@ module LooksGood
 HOW TO FIX:\n 
 - cp #{comparison.diff_image.path(:candidate)} #{@expected_reference_file}
 or
-- LOOKS_GOOD=true rspec ...]
+- LOOKS_GOOD=true rspec ...
+--
+#{LooksGood::LooksGood::Configuration.custom_failure_message}]
           result_hash[:result] = false
           result_hash
         else

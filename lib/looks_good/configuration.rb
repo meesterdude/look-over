@@ -32,6 +32,10 @@ module LooksGood
         @disable_scaling ||= false
       end
 
+      def custom_failure_message
+        @custom_failure_message ||= ""
+      end
+
       def fuzz
         @fuzz ||= "10%"
       end
