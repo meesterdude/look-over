@@ -63,6 +63,7 @@ you can override any of the defaults with a config block.
             c.sleep_between_tries = 0.5
             c.browser_folders = false
             c.scale_amount = 0.5
+            c.disable_scling = true
             c.fuzz = "10%"
           end
 
@@ -87,7 +88,13 @@ Also created are subfolders:
 - allows pixels to not need to match exactly. a string percentage value, provided to imagemagick as fuzz value for comparison. default is "10%"
 
 #### scale_amount
-- Retina mac screenshots are 2x actual size, so this scales them to be 1:1. default is 0.5, set to 1 to disable. 
+- Retina mac screenshots are 2x actual size, so this scales them to be 1:1. default is 0.5.
+
+#### disable_scaling
+set to true to disable the scaling behavior
+
+#### custom_error_message
+When the spec fails, this message will be appended to the failure. 
 
 #### Sleep_between_tries 
 - sets the sleep time (in seconds) between match tries (requires max_no_tries > 1). Defaults to 0.5
