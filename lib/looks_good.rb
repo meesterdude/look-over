@@ -41,7 +41,7 @@ HOW TO FIX:\n
 or
 - LOOKS_GOOD=true rspec ...
 --
-#{LooksGood::LooksGood::Configuration.custom_failure_message}]
+#{LooksGood::Configuration.custom_failure_message}]
           result_hash[:result] = false
           result_hash
         else
